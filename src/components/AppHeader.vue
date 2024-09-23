@@ -1,6 +1,11 @@
 <script>
+import Search from "./Search.vue";
+
 export default {
-    name: "AppHeader"
+    name: "AppHeader",
+    components: {
+        Search
+    }
 }
 </script>
 
@@ -8,6 +13,8 @@ export default {
     <!-- Header -->
     <header>
         <h2>AppHeader</h2>
+        <!-- Search -->
+        <Search />
     </header>
 </template>
 
@@ -20,11 +27,13 @@ header {
     background-color: $background-color;
     border: 2px dashed #F24822;
     @include flex(row, wrap);
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    padding: 0 1rem;
 
     h2 {
         color: #FFF;
+        margin: 0;
     }
 }
 </style>
