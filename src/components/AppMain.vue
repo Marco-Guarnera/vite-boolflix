@@ -1,10 +1,12 @@
 <script>
-import List from "./List.vue";
+import MoviesList from "./MoviesList.vue";
+import SeriesList from "./SeriesList.vue";
 
 export default {
     name: "AppMain",
     components: {
-        List
+        MoviesList,
+        SeriesList
     }
 }
 </script>
@@ -13,8 +15,10 @@ export default {
     <!-- Main -->
     <main>
         <h2>AppMain</h2>
-        <!-- List -->
-        <List />
+        <!-- Movies List -->
+        <MoviesList />
+        <!-- Series List -->
+        <SeriesList />
     </main>
 </template>
 

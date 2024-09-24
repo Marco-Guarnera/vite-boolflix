@@ -1,6 +1,6 @@
 <script>
 export default {
-    name: "ListItem",
+    name: "MoviesListItem",
     props: {
         title: {
             type: String,
@@ -20,43 +20,42 @@ export default {
         }
     },
     data: () => ({
-        imgName: ""
     }),
     computed: {
-        imgSrc() {
+        flagImgSrc() {
+            let imgName = "";
             switch (this.originalLanguage) {
                 case "en":
-                    this.imgName = "en.png";
+                    imgName = "en.png";
                     break;
                 case "it":
-                    this.imgName = "it.png";
+                    imgName = "it.png";
                     break;
                 case "fr":
-                    this.imgName = "fr.png";
+                    imgName = "fr.png";
                     break;
                 case "es":
-                    this.imgName = "es.png";
+                    imgName = "es.png";
                     break;
                 case "de":
-                    this.imgName = "de.png";
+                    imgName = "de.png";
                     break;
                 default:
-                    this.imgName = this.originalLanguage;
-                    break;
+                    return this.originalLanguage;
             }
-            return new URL(`../assets/img/${this.imgName}`, import.meta.url).href;
+            return new URL(`../assets/img/${imgName}`, import.meta.url).href;
         }
     }
 }
 </script>
 
 <template>
-    <!-- List Item -->
-    <li class="list-item">
+    <!-- Movies List Item -->
+    <li class="movies-list-item">
         <div v-text="title"></div>
         <div v-text="originalTitle"></div>
-        <div v-if="imgName === originalLanguage" v-text="originalLanguage"></div>
-        <img v-else :src="imgSrc" :alt="title">
+        <div v-if="flagImgSrc === originalLanguage" v-text="originalLanguage"></div>
+        <img v-else :src="flagImgSrc" :alt="title" class="flag">
         <div v-text="voteAverage"></div>
     </li>
 </template>

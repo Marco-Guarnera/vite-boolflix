@@ -6,19 +6,32 @@ export default {
     name: "Search",
     data: () => ({
         store,
-        apiUrl: "https://api.themoviedb.org/3/search/movie",
-        searchedInput: ""
+        searchedInput: "",
+        apiKey: "fd6c8d21185dd9ebbf4e3da065049532",
+        moviesRequest: "https://api.themoviedb.org/3/search/movie",
+        seriesRequest: "https://api.themoviedb.org/3/search/tv"
     }),
     methods: {
-        getList() {
-            axios.get(this.apiUrl, {
-                params: {
-                    api_key: "fd6c8d21185dd9ebbf4e3da065049532",
-                    query: this.searchedInput
-                }
-            }).then(response => {
-                this.store.list = response.data.results;
+        getLists() {
+            axios.all([
+                axios.get(this.moviesRequest, {
+                    params: {
+                        api_key: this.apiKey,
+                        query: this.searchedInput
+                    }
+                }),
+                axios.get(this.seriesRequest, {
+                    params: {
+                        api_key: this.apiKey,
+                        query: this.searchedInput
+                    }
+                })
+            ]).then(axios.spread((moviesResponse, seriesResponse) => {
+                this.store.moviesList = moviesResponse.data.results;
+                this.store.seriesList = seriesResponse.data.results;
                 this.searchedInput = "";
+            })).catch(error => {
+                console.log(error);
             });
         }
     }
@@ -27,11 +40,10 @@ export default {
 
 <template>
     <!-- Search -->
-    <div id="search">
-        <input type="search" id="search-bar" class="form-control" placeholder="Search" v-model="searchedInput"
-            @keyup.enter="getList">
-        <button id="search-button" class="btn btn-primary" @click="getList">Search</button>
-    </div>
+    <form id="search" @submit.prevent="getLists">
+        <input type="search" id="search-bar" class="form-control" placeholder="Search" v-model.trim="searchedInput">
+        <button id="search-button" class="btn btn-primary">Search</button>
+    </form>
 </template>
 
 <style lang="scss" scoped>
