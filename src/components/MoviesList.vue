@@ -20,7 +20,7 @@ export default {
         <!-- Movies List Item -->
         <MoviesListItem v-for="item in store.moviesList" :key="item.id" :title="item.title"
             :original-title="item.original_title" :original-language="item.original_language"
-            :vote-average="item.vote_average" />
+            :vote-average="item.vote_average" :poster="item.poster_path" />
     </ul>
 </template>
 

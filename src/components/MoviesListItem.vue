@@ -17,9 +17,14 @@ export default {
         voteAverage: {
             type: Number,
             required: true
+        },
+        poster: {
+            type: String,
+            required: true
         }
     },
     data: () => ({
+        imgWidth: "w342"
     }),
     computed: {
         flagImgSrc() {
@@ -44,6 +49,9 @@ export default {
                     return this.originalLanguage;
             }
             return new URL(`../assets/img/${imgName}`, import.meta.url).href;
+        },
+        posterImgSrc() {
+            return `https://image.tmdb.org/t/p/${this.imgWidth}/${this.poster}`;
         }
     }
 }
@@ -57,6 +65,7 @@ export default {
         <div v-if="flagImgSrc === originalLanguage" v-text="originalLanguage"></div>
         <img v-else :src="flagImgSrc" :alt="title" class="flag">
         <div v-text="voteAverage"></div>
+        <img :src="posterImgSrc" :alt="title" class="poster">
     </li>
 </template>
 

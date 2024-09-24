@@ -20,7 +20,7 @@ export default {
         <!-- Series List Item -->
         <SeriesListItem v-for="item in store.seriesList" :key="item.id" :title="item.name"
             :original-title="item.original_name" :original-language="item.original_language"
-            :vote-average="item.vote_average" />
+            :vote-average="item.vote_average" :poster="item.poster_path" />
     </ul>
 </template>
 
