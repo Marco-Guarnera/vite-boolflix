@@ -41,16 +41,26 @@ export default {
 <template>
     <!-- Search -->
     <form id="search" @submit.prevent="getLists">
-        <input type="search" id="search-bar" class="form-control" placeholder="Search" v-model.trim="searchedInput">
-        <button id="search-button" class="btn btn-primary">Search</button>
+        <input type="search" id="search-bar" class="form-control" placeholder="Cerca..." v-model.trim="searchedInput">
+        <button id="search-button" class="btn"><font-awesome-icon icon="fa-solid fa-magnifying-glass" /></button>
     </form>
 </template>
 
 <style lang="scss" scoped>
+@use "../scss/partials/color-variables.scss" as *;
 @use "../scss/partials/mixins.scss" as *;
 
 #search {
     @include flex(row, nowrap);
-    gap: 0.5rem;
+    gap: 0.25rem;
+
+    * {
+        border: 0;
+    }
+
+    #search-button {
+        color: #FFF;
+        background-color: $primary-color;
+    }
 }
 </style>

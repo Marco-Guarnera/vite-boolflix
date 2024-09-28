@@ -12,7 +12,15 @@ export default {
 <template>
     <!-- Header -->
     <header>
-        <h2>AppHeader</h2>
+        <!-- Navbar -->
+        <nav id="navbar">
+            <ul id="navbar-list" class="m-0 p-0">
+                <li class="navbar-list-item"><a href="#"><h2>Boolflix</h2></a></li>
+                <li class="navbar-list-item"><a href="#">Home</a></li>
+                <li class="navbar-list-item"><a href="#">Film</a></li>
+                <li class="navbar-list-item"><a href="#">Serie TV</a></li>
+            </ul>
+        </nav>
         <!-- Search -->
         <Search />
     </header>
@@ -25,15 +33,24 @@ export default {
 header {
     height: 75px;
     background-color: $background-color;
-    border: 2px dashed #F24822;
     @include flex(row, wrap);
     justify-content: space-between;
     align-items: center;
     padding: 0 1rem;
 
-    h2 {
-        color: #FFF;
-        margin: 0;
+    #navbar-list {
+        @include flex(row, nowrap);
+        align-items: center;
+        gap: 1rem;
+
+        a {
+            color: #FFF;
+
+            h2 {
+                color: $primary-color;
+                margin: 0 1.5rem 0 0;
+            }
+        }
     }
 }
 </style>
