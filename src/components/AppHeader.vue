@@ -5,6 +5,34 @@ export default {
     name: "AppHeader",
     components: {
         Search
+    },
+    data: () => ({
+        currentPage: 0,
+        // Struttura dati
+        pagesList: [
+            {
+                id: 1,
+                name: "Home",
+                url: "#"
+            },
+
+            {
+                id: 2,
+                name: "Film",
+                url: "#"
+            },
+
+            {
+                id: 3,
+                name: "Serie TV",
+                url: "#"
+            }
+        ]
+    }),
+    methods: {
+        setActivePage(page) {
+            if (page === this.currentPage) return "active-page";
+        }
     }
 }
 </script>
@@ -15,10 +43,12 @@ export default {
         <!-- Navbar -->
         <nav id="navbar">
             <ul id="navbar-list" class="m-0 p-0">
-                <li class="navbar-list-item"><a href="#"><h2>Boolflix</h2></a></li>
-                <li class="navbar-list-item"><a href="#">Home</a></li>
-                <li class="navbar-list-item"><a href="#">Film</a></li>
-                <li class="navbar-list-item"><a href="#">Serie TV</a></li>
+                <li class="navbar-list-item">
+                    <a href="#"><h2>Boolflix</h2></a>
+                </li>
+                <li class="navbar-list-item" :class="setActivePage(i)" v-for="(item, i) in pagesList" :key="item.id">
+                    <a :href="item.url" v-text="item.name"></a>
+                </li>
             </ul>
         </nav>
         <!-- Search -->
@@ -43,12 +73,21 @@ header {
         align-items: center;
         gap: 1rem;
 
-        a {
-            color: #FFF;
+        h2 {
+            color: $primary-color;
+            margin: 0 1.5rem 0 0;
+        }
 
-            h2 {
-                color: $primary-color;
-                margin: 0 1.5rem 0 0;
+        .active-page a {
+            cursor: default;
+            color: #FFF;
+        }
+
+        :not(.active-page) a {
+            color: #DDD;
+
+            &:hover {
+                color: #BBB;
             }
         }
     }
